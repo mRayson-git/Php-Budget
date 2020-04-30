@@ -1,1 +1,2 @@
 *.csv
+/website/Models/databaseLoginInfo.json
