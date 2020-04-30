@@ -1,0 +1,79 @@
+body{
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  color: white;
+  background-color: #212121;
+}
+.empower{
+  color: #00cc00;
+  font-weight: bold;
+}
+
+/*TopNav Options*/
+.topnav{
+  display: block;
+  background-color: #404040;
+  width: auto;
+  padding-left: 10px;
+  height: max-content;
+  margin-top: 0;
+}
+.topnav .logo{
+  font-size: 40px;
+}
+.container{
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+/*Import-Options Elements*/
+.menu-bar{
+ width: auto;
+ background-color: #404040;
+ margin-bottom: 10px;
+ padding: 10px;
+}
+.menu-bar button{
+  margin: 5px;
+  border-style: none;
+  padding: 10px;
+  color: white;
+  background-color: #595959;
+}
+.menu-bar button:hover{
+  background-color: #999999;
+}
+
+/*Transaction List Elements*/
+.transactionList{
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #595959;
+  overflow-y: scroll;
+  height: 70vh;
+}
+.transactionList table{
+  margin-left: auto; margin-right: auto;
+  border-collapse: collapse;
+  width: max-content;
+  text-align: right;
+}
+.transactionList td{
+  padding: 5px 10px 5px 10px;
+}
+.transactionList thead{
+  background-color: #404040;
+  text-decoration: underline;
+  font-weight: bold;
+  text-align: center;
+  position: sticky;
+  top: 0;
+}
+.transactionList th{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

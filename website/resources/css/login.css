@@ -1,0 +1,48 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+    color: white;
+    background-color: #212121;
+}
+.container{
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+.empower{
+    color: #00cc00;
+    font-weight: bold;
+}
+.opening{
+    margin-top: 25vh;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: max-content;
+    height: max-content;
+}
+.opening h1{
+    font-size: 50px;
+    margin-bottom: 0;
+}
+
+.login{
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
+}
+.login button{
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.login input{
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-width:thin;
+  border-color: white;
+  color: inherit;
+  background-color: inherit;
+}
