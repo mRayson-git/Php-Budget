@@ -17,7 +17,7 @@ if (file_exists('../resources/data/pcbanking.csv')){
   $scotiaArray = array();
   $file = fopen('../resources/data/pcbanking.csv', 'r');
   while (($data = fgetcsv($file, 1000, ",")) !== FALSE){
-    $transaction = new Record($_GET['user_id'], 'ScotiaChecking', $data[1], $data[4], $data[3], fixDate($data[0]));
+    $transaction = new Record($_GET['user_id'], 'ScotiaChecking', $data[1], cleanString($data[4]), $data[3], fixDate($data[0]));
     array_push($scotiaArray, $transaction);
   }
   rename('../resources/data/pcbanking.csv', '../resources/data/oldfiles/pcbanking.csv');
@@ -55,6 +55,7 @@ function addRecords($transArray){
   foreach ($transArray as $trans){
     if (strtotime($trans->getDate()) >= $lastRun){
       $transDAO->addRecord($trans);
+      //$transDAO->updateRecords($_GET['user_id'],$trans->getPayee());
     }
   }
 }
@@ -69,7 +70,10 @@ function cleanString($oldString){
   $oldString = str_split($oldString);
   $newString = array();
   $i = 0;
-  while ($i < count($oldString) && !($oldString[$i] == ' ' && $oldString[$i+1] == ' ')){
+  while ($i < count($oldString)){
+    if ($oldString[$i] == ' ' && $oldString[$i+1] == ' '){
+      return implode($newString);
+    }
     array_push($newString, $oldString[$i]);
     $i++;
   }

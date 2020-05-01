@@ -7,9 +7,6 @@ if (!isset($_SESSION['user_id'])){
 }
 require_once('../Models/transactionDAO.php');
 $transDAO = new transactionDAO();
-if (isset($_POST['importFromDir'])){
-  require_once('../Controllers/upload.php');
-}
 
 ?>
 <!DOCTYPE html>
@@ -31,7 +28,6 @@ if (isset($_POST['importFromDir'])){
       <div class="menu-bar">
         <?php
         echo '<a href=\'../Controllers/upload.php?user_id=' . $_SESSION['user_id'] . '\'><button type="button" name="import">Import from Data Dir</button></a>';
-        echo '<a href=\'editTransactionView.php?user_id=' . $_SESSION['user_id'] . '\'><button type="button" name="edit">View Uncategorized Payees</button></a>';
         ?>
       </div>
       <!-- <div class="fileUpload">
@@ -41,7 +37,7 @@ if (isset($_POST['importFromDir'])){
         </form>
       </div> -->
       <?php
-      if ($transactions = $transDAO->getRecords($_SESSION['user_id'])){
+      if ($transactions = $transDAO->getRecordsByDate($_SESSION['user_id'])){
         echo '
         <div class="transactionList">
         <table>
@@ -75,7 +71,7 @@ if (isset($_POST['importFromDir'])){
           echo '<td>' . $trans[5] . '</td>';
           echo '<td>' . $trans[6] . '</td>';
           echo '<td>' . $trans[8] . '</td>';
-          echo '<td>' . $trans[7] . '</td></tr>';
+          echo '<td style="min-width:40px;">' . $trans[7] . '</td></tr>';
           $count++;
         }
         echo '</tbody></table></div>';
@@ -83,6 +79,54 @@ if (isset($_POST['importFromDir'])){
         echo '<div class="filler">No transactions on file</div>';
       }
       ?>
+      <h2>
+        Category Updater
+        <?php echo '(' . $transDAO->countUnsortedPayees($_SESSION['user_id']) . ')'; ?>
+      </h2>
+      <div class="form">
+        <form class="cat-update" id="cat-update" action="../Controllers/updateCats.php" method="get">
+          <table>
+            <tr>
+              <td>
+                <label for="payee-selector">Payee Selector</label>
+                <select class="payeeList" name="payee-selector">
+                  <?php
+                  $unsortedPayees = $transDAO->getUnsortedPayees($_SESSION['user_id']);
+                  foreach ($unsortedPayees as $i){
+                    foreach ($i as $option){
+                      echo '<option>' . $option . '</option>';
+                    }
+                  }
+                  ?>
+                </select>
+              </td>
+              <td>
+                <label for="cat-selector">Category Selector</label>
+                <select class="catList" name="cat-selector">
+                  <option>Monthly Expense: Rent</option>
+                  <option>Monthly Expense: Electricity</option>
+                  <option>Everyday Expense: Groceries</option>
+                  <option>Everyday Expense: Gas</option>
+                  <option>Everyday Expense: Clothes</option>
+                  <option>Everyday Expense: Eating Out</option>
+                  <option>Misc Expense: Bills</option>
+                  <option>Misc Expense: Repair/Home</option>
+                  <option>Misc Expense: Entertainment</option>
+                  <option>Misc Expense: Gifts</option>
+                  <option>Misc Expense: Misc</option>
+                  <option>Misc Expense: School</option>
+                  <option>Misc Expense: Health</option>
+                  <option>Transfer: Savings</option>
+                  <option>Transfer: Misc</option>
+                  <option>Income: Work</option>
+                  <option>Income: Misc</option>
+                </select>
+              </td>
+              <td><input type="submit" name="submit" value="Confirm"></td>
+            </tr>
+          </table>
+        </form>
+      </div>
     </div>
   </body>
 </html>
