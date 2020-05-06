@@ -80,7 +80,7 @@ class transactionDAO extends abstractDAO{
     if ($result){
       $query = 'UPDATE transaction_t SET trans_category = ? WHERE $payee =? AND trans_category == \'Unsorted\'';
       $stmt = $this->mysqli->prepare($query);
-      $stmt->bind_param('si', $result, $payee);
+      $stmt->bind_param('ss', $result, $payee);
       $stmt->execute();
       if ($stmt->error){
         echo $stmt->error;

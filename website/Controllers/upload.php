@@ -55,7 +55,7 @@ function addRecords($transArray){
   foreach ($transArray as $trans){
     if (strtotime($trans->getDate()) >= $lastRun){
       $transDAO->addRecord($trans);
-      //$transDAO->updateRecords($_GET['user_id'],$trans->getPayee());
+      $transDAO->updateRecords($_GET['user_id'],$trans->getPayee());
     }
   }
 }

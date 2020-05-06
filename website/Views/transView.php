@@ -27,15 +27,10 @@ $transDAO = new transactionDAO();
       </div>
       <div class="menu-bar">
         <?php
-        echo '<a href=\'../Controllers/upload.php?user_id=' . $_SESSION['user_id'] . '\'><button type="button" name="import">Import from Data Dir</button></a>';
+        echo '<input type="file" name="csv" id="csv">';
+        echo '<a href=\'../Controllers/upload.php?user_id=' . $_SESSION['user_id'] . '\'><button type="button" name="import">Import from Data Directory</button></a>';
         ?>
       </div>
-      <!-- <div class="fileUpload">
-        <form class="upload" action="../Controllers/upload.php" method="post" enctype="multipart/form-data">
-          <input type="file" name="csv" id="csv">
-          <input type="submit" name="submit" value="Upload CSV">
-        </form>
-      </div> -->
       <?php
       if ($transactions = $transDAO->getRecordsByDate($_SESSION['user_id'])){
         echo '
