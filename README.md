@@ -1,4 +1,4 @@
-# WebApp-Budget
+# Php-Budget
 Project building off of the lessons I learned in my Command Line Budget
 Application. Uses html, php and mysql to:
 
